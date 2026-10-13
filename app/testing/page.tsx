@@ -152,15 +152,17 @@ export default function TestingPage() {
       </div>
 
       {/* Proceed button */}
-      {step !== "success" && (
-        <div className="absolute bottom-10 right-8">
+      <div className="absolute bottom-10 right-8">
+        {step === "success" ? (
+          <SideButton label="Proceed" direction="right" href="/result" />
+        ) : (
           <SideButton
             label="Proceed"
             direction="right"
             onClick={handleProceed}
           />
-        </div>
-      )}
+        )}
+      </div>
     </main>
   );
 }
