@@ -7,8 +7,8 @@ export default function Home() {
       <Header />
 
       {/* Dotted diamonds */}
-      <div className="pointer-events-none absolute left-0 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rotate-45 border border-dotted border-gray-400" />
-      <div className="pointer-events-none absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 translate-x-1/2 rotate-45 border border-dotted border-gray-400" />
+      <div className="pointer-events-none absolute left-0 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-dotted border-gray-400" />
+      <div className="pointer-events-none absolute right-0 top-1/2 h-125 w-125 -translate-y-1/2 translate-x-1/2 rotate-45 border border-dotted border-gray-400" />
 
       <h1 className="pointer-events-none absolute inset-0 flex items-center justify-center text-center text-7xl font-light leading-none tracking-tighter md:text-9xl">
         Sophisticated
@@ -21,7 +21,7 @@ export default function Home() {
         <SideButton label="Discover A.I." direction="left" />
       </div>
       <div className="absolute right-[6%] top-1/2 -translate-y-1/2">
-        <SideButton label="Take test" direction="right" />
+        <SideButton label="Take test" direction="right" href="/testing" />
       </div>
 
       <p className="absolute bottom-10 left-8 max-w-xs text-xs uppercase">
