@@ -14,7 +14,7 @@ export default function SideButton({
   onClick,
 }: SideButtonProps) {
   const diamond = (
-    <span className="flex h-9 w-9 rotate-45 items-center justify-center border border-[#1a1b1c]">
+    <span className="flex h-9 w-9 rotate-45 items-center justify-center border border-current">
       <span className="-rotate-45 text-[10px]">
         {direction === "left" ? "◀" : "▶"}
       </span>

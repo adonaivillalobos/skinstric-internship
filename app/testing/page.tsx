@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Header from "../components/Header";
-import SideButton from "../components/SideButton";
+import Header from "../../components/Header";
+import SideButton from "../../components/SideButton";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne";
@@ -77,10 +77,21 @@ export default function TestingPage() {
         To start analysis
       </p>
 
-      {/* Tilted dotted squares */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-112.5 w-112.5 -translate-x-1/2 -translate-y-1/2 rotate-8 border border-dotted border-gray-300" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-112.5 w-112.5 -translate-x-1/2 -translate-y-1/2 rotate-20 border border-dotted border-gray-400" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-112.5 w-112.5 -translate-x-1/2 -translate-y-1/2 rotate-32 border border-dotted border-gray-300" />
+      {/* Tilted dotted squares: slowly rotating clockwise */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-112.5 w-112.5 -translate-x-1/2 -translate-y-1/2">
+        <div
+          className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+          style={{ rotate: "8deg", animationDuration: "40s" }}
+        />
+        <div
+          className="spin-clockwise absolute inset-0 border border-dotted border-gray-400"
+          style={{ rotate: "20deg", animationDuration: "32s" }}
+        />
+        <div
+          className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+          style={{ rotate: "32deg", animationDuration: "24s" }}
+        />
+      </div>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         {step === "success" ? (

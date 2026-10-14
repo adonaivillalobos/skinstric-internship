@@ -3,8 +3,8 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FiCamera, FiImage } from "react-icons/fi";
-import Header from "../components/Header";
-import SideButton from "../components/SideButton";
+import Header from "../../components/Header";
+import SideButton from "../../components/SideButton";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
@@ -15,6 +15,7 @@ export default function ResultPage() {
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showCameraPrompt, setShowCameraPrompt] = useState(false);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -88,12 +89,26 @@ export default function ResultPage() {
 
       {/* Camera option (Phase 3) */}
       <div className="absolute left-[25%] top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-8 border border-dotted border-gray-300" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-20 border border-dotted border-gray-400" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-32 border border-dotted border-gray-300" />
+        {/* Tilted dotted squares: slowly rotating clockwise */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2">
+          <div
+            className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+            style={{ rotate: "8deg", animationDuration: "40s" }}
+          />
+          <div
+            className="spin-clockwise absolute inset-0 border border-dotted border-gray-400"
+            style={{ rotate: "20deg", animationDuration: "32s" }}
+          />
+          <div
+            className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+            style={{ rotate: "32deg", animationDuration: "24s" }}
+          />
+        </div>
 
         <button
           type="button"
+          onClick={() => setShowCameraPrompt(true)}
+          disabled={loading}
           className="relative flex h-24 w-24 items-center justify-center rounded-full border border-[#1a1b1c]"
         >
           <FiCamera size={40} />
@@ -101,13 +116,50 @@ export default function ResultPage() {
         <p className="absolute -top-8 left-24 w-40 text-sm uppercase">
           Allow A.I. to scan your face
         </p>
+
+        {/* Camera permission box */}
+        {showCameraPrompt && (
+          <div className="absolute left-28 top-28 z-30 w-72 bg-[#1a1b1c] text-white">
+            <p className="px-5 pb-10 pt-5 text-sm font-semibold uppercase">
+              Allow A.I. to access your camera
+            </p>
+            <div className="flex justify-end gap-6 border-t border-gray-600 px-5 py-3 text-sm uppercase">
+              <button
+                type="button"
+                onClick={() => setShowCameraPrompt(false)}
+                className="text-gray-400 hover:text-white"
+              >
+                Deny
+              </button>
+              <button
+                type="button"
+                onClick={() => router.push("/camera")}
+                className="font-semibold"
+              >
+                Allow
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Gallery option (Phase 2) */}
       <div className="absolute left-[75%] top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-8 border border-dotted border-gray-300" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-20 border border-dotted border-gray-400" />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-32 border border-dotted border-gray-300" />
+        {/* Tilted dotted squares: slowly rotating clockwise */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2">
+          <div
+            className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+            style={{ rotate: "8deg", animationDuration: "40s" }}
+          />
+          <div
+            className="spin-clockwise absolute inset-0 border border-dotted border-gray-400"
+            style={{ rotate: "20deg", animationDuration: "32s" }}
+          />
+          <div
+            className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+            style={{ rotate: "32deg", animationDuration: "24s" }}
+          />
+        </div>
 
         <button
           type="button"
@@ -140,9 +192,21 @@ export default function ResultPage() {
       {/* Loading screen */}
       {loading && (
         <div className="absolute inset-x-0 bottom-28 top-32 z-20 flex flex-col items-center justify-center bg-white">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rotate-8 border border-dotted border-gray-300" />
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rotate-20 border border-dotted border-gray-400" />
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rotate-32 border border-dotted border-gray-300" />
+          {/* Tilted dotted squares: slowly rotating clockwise */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2">
+            <div
+              className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+              style={{ rotate: "8deg", animationDuration: "40s" }}
+            />
+            <div
+              className="spin-clockwise absolute inset-0 border border-dotted border-gray-400"
+              style={{ rotate: "20deg", animationDuration: "32s" }}
+            />
+            <div
+              className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
+              style={{ rotate: "32deg", animationDuration: "24s" }}
+            />
+          </div>
 
           <p className="relative text-xl font-semibold uppercase">
             Preparing your analysis...

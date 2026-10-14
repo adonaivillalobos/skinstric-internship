@@ -4,3 +4,33 @@ body {
   background: #ffffff;
   color: #1a1b1c;
 }
+
+@keyframes spin-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-clockwise {
+  animation: spin-clockwise 40s linear infinite;
+}
+
+@keyframes fill-circle {
+  from {
+    stroke-dashoffset: var(--circumference);
+  }
+}
+
+.fill-circle {
+  animation: fill-circle 1200ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-clockwise,
+  .fill-circle {
+    animation: none;
+  }
+}
