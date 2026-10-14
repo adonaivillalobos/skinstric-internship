@@ -159,7 +159,7 @@ export default function ResultPage() {
 
       {/* Camera permission box: centered on phones, next to the camera on desktop */}
       {showCameraPrompt && (
-        <div className="absolute left-1/2 top-1/2 z-40 w-[80vw] max-w-72 -translate-x-1/2 -translate-y-1/2 bg-[#1a1b1c] text-white md:left-[calc(25%_+_64px)] md:top-[calc(50%_+_64px)] md:w-72 md:max-w-none md:translate-x-0 md:translate-y-0">
+        <div className="absolute left-1/2 top-1/2 z-40 w-[80vw] max-w-72 -translate-x-1/2 -translate-y-1/2 bg-[#1a1b1c] text-white md:left-[calc(25%+64px)] md:top-[calc(50%+64px)] md:w-72 md:max-w-none md:translate-x-0 md:translate-y-0">
           <p className="px-5 pb-10 pt-5 text-sm font-semibold uppercase">
             Allow A.I. to access your camera
           </p>
