@@ -73,9 +73,9 @@ export default function ResultPage() {
       </p>
 
       {/* Preview box */}
-      <div className="absolute right-8 top-24 z-30 hidden md:block">
+      <div className="absolute right-6 top-24 z-30 md:right-8">
         <p className="mb-2 text-sm">Preview</p>
-        <div className="h-40 w-40 overflow-hidden border border-gray-300 bg-white">
+        <div className="h-24 w-24 overflow-hidden border border-gray-300 bg-white md:h-40 md:w-40">
           {preview && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -88,9 +88,9 @@ export default function ResultPage() {
       </div>
 
       {/* Camera option (Phase 3) */}
-      <div className="absolute left-[25%] top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 md:left-[25%] md:top-1/2">
         {/* Tilted dotted squares: slowly rotating clockwise */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 md:h-80 md:w-80">
           <div
             className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
             style={{ rotate: "8deg", animationDuration: "40s" }}
@@ -113,40 +113,15 @@ export default function ResultPage() {
         >
           <FiCamera size={40} />
         </button>
-        <p className="absolute -top-8 left-24 w-40 text-sm uppercase">
+        <p className="absolute left-1/2 top-full mt-6 w-48 -translate-x-1/2 text-center text-sm uppercase md:-top-8 md:left-24 md:mt-0 md:w-40 md:translate-x-0 md:text-left">
           Allow A.I. to scan your face
         </p>
-
-        {/* Camera permission box */}
-        {showCameraPrompt && (
-          <div className="absolute left-28 top-28 z-30 w-72 bg-[#1a1b1c] text-white">
-            <p className="px-5 pb-10 pt-5 text-sm font-semibold uppercase">
-              Allow A.I. to access your camera
-            </p>
-            <div className="flex justify-end gap-6 border-t border-gray-600 px-5 py-3 text-sm uppercase">
-              <button
-                type="button"
-                onClick={() => setShowCameraPrompt(false)}
-                className="text-gray-400 hover:text-white"
-              >
-                Deny
-              </button>
-              <button
-                type="button"
-                onClick={() => router.push("/camera")}
-                className="font-semibold"
-              >
-                Allow
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Gallery option (Phase 2) */}
-      <div className="absolute left-[75%] top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-[70%] -translate-x-1/2 -translate-y-1/2 md:left-[75%] md:top-1/2">
         {/* Tilted dotted squares: slowly rotating clockwise */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2">
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 md:h-80 md:w-80">
           <div
             className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
             style={{ rotate: "8deg", animationDuration: "40s" }}
@@ -169,7 +144,7 @@ export default function ResultPage() {
         >
           <FiImage size={40} />
         </button>
-        <p className="absolute -bottom-10 right-24 w-40 text-right text-sm uppercase">
+        <p className="absolute left-1/2 top-full mt-6 w-48 -translate-x-1/2 text-center text-sm uppercase md:-bottom-10 md:left-auto md:right-24 md:top-auto md:mt-0 md:w-40 md:translate-x-0 md:text-right">
           Allow A.I. access gallery
         </p>
 
@@ -182,6 +157,31 @@ export default function ResultPage() {
         />
       </div>
 
+      {/* Camera permission box: centered on phones, next to the camera on desktop */}
+      {showCameraPrompt && (
+        <div className="absolute left-1/2 top-1/2 z-40 w-[80vw] max-w-72 -translate-x-1/2 -translate-y-1/2 bg-[#1a1b1c] text-white md:left-[calc(25%_+_64px)] md:top-[calc(50%_+_64px)] md:w-72 md:max-w-none md:translate-x-0 md:translate-y-0">
+          <p className="px-5 pb-10 pt-5 text-sm font-semibold uppercase">
+            Allow A.I. to access your camera
+          </p>
+          <div className="flex justify-end gap-6 border-t border-gray-600 px-5 py-3 text-sm uppercase">
+            <button
+              type="button"
+              onClick={() => setShowCameraPrompt(false)}
+              className="text-gray-400 hover:text-white"
+            >
+              Deny
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push("/camera")}
+              className="font-semibold"
+            >
+              Allow
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Error message */}
       {error && (
         <p className="absolute bottom-24 left-1/2 -translate-x-1/2 text-center text-sm uppercase text-red-600">
@@ -193,7 +193,7 @@ export default function ResultPage() {
       {loading && (
         <div className="absolute inset-x-0 bottom-28 top-32 z-20 flex flex-col items-center justify-center bg-white">
           {/* Tilted dotted squares: slowly rotating clockwise */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 md:h-96 md:w-96">
             <div
               className="spin-clockwise absolute inset-0 border border-dotted border-gray-300"
               style={{ rotate: "8deg", animationDuration: "40s" }}
@@ -208,7 +208,7 @@ export default function ResultPage() {
             />
           </div>
 
-          <p className="relative text-xl font-semibold uppercase">
+          <p className="relative px-4 text-center text-xl font-semibold uppercase">
             Preparing your analysis...
           </p>
           <div className="relative mt-6 flex gap-4">
