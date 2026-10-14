@@ -25,7 +25,7 @@ export default function CameraPage() {
       {/* Dotted diamonds */}
       <div className="pointer-events-none absolute left-1/2 top-[45%] h-96 w-96 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-dotted border-gray-400" />
       <div className="pointer-events-none absolute left-1/2 top-[45%] h-104 w-104 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-dotted border-gray-300" />
-      <div className="pointer-events-none absolute left-1/2 top-[45%] h-112 w-112 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-dotted border-gray-200" />
+      <div className="pointer-events-none absolute left-1/2 top-[45%] h-md w-md -translate-x-1/2 -translate-y-1/2 rotate-45 border border-dotted border-gray-200" />
 
       {/* Camera icon and text */}
       <div className="absolute left-1/2 top-[45%] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-6">
