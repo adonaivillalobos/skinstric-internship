@@ -13,10 +13,26 @@ export default function SideButton({
   href = "#",
   onClick,
 }: SideButtonProps) {
+  const isLeft = direction === "left";
+
   const diamond = (
-    <span className="flex h-9 w-9 rotate-45 items-center justify-center border border-current">
-      <span className="-rotate-45 text-[10px]">
-        {direction === "left" ? "◀" : "▶"}
+    <span
+      className={`flex rotate-45 items-center justify-center border border-current ${
+        isLeft ? "h-16 w-16 md:h-9 md:w-9" : "h-9 w-9"
+      }`}
+    >
+      {/* Phones: the label sits inside the diamond (Back buttons only) */}
+      {isLeft && (
+        <span className="-rotate-45 text-xs font-semibold md:hidden">
+          {label}
+        </span>
+      )}
+
+      {/* Tablet and desktop: the arrow sits inside the diamond */}
+      <span
+        className={`-rotate-45 text-[10px] ${isLeft ? "hidden md:inline" : ""}`}
+      >
+        {isLeft ? "◀" : "▶"}
       </span>
     </span>
   );
@@ -25,9 +41,10 @@ export default function SideButton({
 
   const content = (
     <>
-      {direction === "left" && diamond}
-      <span>{label}</span>
-      {direction === "right" && diamond}
+      {isLeft && diamond}
+      {/* On phones, Back buttons show the label inside the diamond instead */}
+      <span className={isLeft ? "hidden md:inline" : ""}>{label}</span>
+      {!isLeft && diamond}
     </>
   );
 
