@@ -1,6 +1,12 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import Link from "next/link";
 import Header from "../../components/Header";
 import SideButton from "../../components/SideButton";
@@ -44,6 +50,61 @@ function formatName(category: CategoryKey, name: string) {
 // 0.5254 -> "52.54%"
 function formatPercent(score: number) {
   return `${(score * 100).toFixed(2)}%`;
+}
+
+// The circle: its line travels from where it is now to the new percentage.
+// It starts empty, so it fills up when the page opens.
+function ProgressRing({ score }: { score: number }) {
+  const circleRef = useRef<SVGCircleElement>(null);
+
+  useEffect(() => {
+    const circle = circleRef.current;
+    if (!circle) return;
+
+    const target = CIRCUMFERENCE * (1 - score);
+    const from =
+      parseFloat(getComputedStyle(circle).strokeDashoffset) || CIRCUMFERENCE;
+
+    const animation = circle.animate(
+      [{ strokeDashoffset: `${from}px` }, { strokeDashoffset: `${target}px` }],
+      { duration: 900, easing: "ease-out", fill: "forwards" }
+    );
+
+    animation.onfinish = () => {
+      circle.style.strokeDashoffset = `${target}px`;
+      animation.cancel();
+    };
+
+    // If a new value arrives mid-movement, keep the current position
+    return () => {
+      circle.style.strokeDashoffset = getComputedStyle(circle).strokeDashoffset;
+      animation.cancel();
+    };
+  }, [score]);
+
+  return (
+    <svg viewBox="0 0 300 300" className="h-full w-full -rotate-90">
+      <circle
+        cx="150"
+        cy="150"
+        r={RADIUS}
+        fill="none"
+        stroke="#d4d4d4"
+        strokeWidth="6"
+      />
+      <circle
+        ref={circleRef}
+        cx="150"
+        cy="150"
+        r={RADIUS}
+        fill="none"
+        stroke="#1a1b1c"
+        strokeWidth="6"
+        strokeDasharray={CIRCUMFERENCE}
+        style={{ strokeDashoffset: `${CIRCUMFERENCE}px` }}
+      />
+    </svg>
+  );
 }
 
 export default function SummaryPage() {
@@ -94,7 +155,6 @@ export default function SummaryPage() {
   const rows = sortScores(data[active]);
   const activeValue = currentValue(active);
   const activeScore = data[active][activeValue];
-  const dashOffset = CIRCUMFERENCE * (1 - activeScore);
 
   return (
     <main className="relative min-h-screen bg-white pb-32 text-[#1a1b1c]">
@@ -143,26 +203,7 @@ export default function SummaryPage() {
           </h2>
 
           <div className="absolute bottom-5 right-5 h-48 w-48 md:h-76 md:w-76">
-            <svg viewBox="0 0 300 300" className="h-full w-full -rotate-90">
-              <circle
-                cx="150"
-                cy="150"
-                r={RADIUS}
-                fill="none"
-                stroke="#d4d4d4"
-                strokeWidth="6"
-              />
-              <circle
-                cx="150"
-                cy="150"
-                r={RADIUS}
-                fill="none"
-                stroke="#1a1b1c"
-                strokeWidth="6"
-                strokeDasharray={CIRCUMFERENCE}
-                strokeDashoffset={dashOffset}
-              />
-            </svg>
+            <ProgressRing score={activeScore} />
             <span className="absolute inset-0 flex items-center justify-center text-2xl font-light md:text-4xl">
               {formatPercent(activeScore)}
             </span>
