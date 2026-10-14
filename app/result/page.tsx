@@ -113,7 +113,18 @@ export default function ResultPage() {
         >
           <FiCamera size={40} />
         </button>
-        <p className="absolute left-1/2 top-full mt-6 w-48 -translate-x-1/2 text-center text-sm uppercase md:-top-8 md:left-24 md:mt-0 md:w-40 md:translate-x-0 md:text-left">
+
+        {/* Connector line and dot (tablet and desktop only) */}
+        <span
+          className="pointer-events-none absolute hidden h-px w-20.5 origin-left bg-gray-500 md:block"
+          style={{ left: 82, top: 14, transform: "rotate(-45deg)" }}
+        />
+        <span
+          className="pointer-events-none absolute hidden h-1.5 w-1.5 rounded-full border border-gray-500 bg-white md:block"
+          style={{ left: 137, top: -47 }}
+        />
+
+        <p className="absolute left-1/2 top-full mt-6 w-48 -translate-x-1/2 text-center text-sm uppercase md:-top-14 md:left-37 md:mt-0 md:w-40 md:translate-x-0 md:text-left">
           Allow A.I. to scan your face
         </p>
       </div>
@@ -144,7 +155,18 @@ export default function ResultPage() {
         >
           <FiImage size={40} />
         </button>
-        <p className="absolute left-1/2 top-full mt-6 w-48 -translate-x-1/2 text-center text-sm uppercase md:-bottom-10 md:left-auto md:right-24 md:top-auto md:mt-0 md:w-40 md:translate-x-0 md:text-right">
+
+        {/* Connector line and dot (tablet and desktop only) */}
+        <span
+          className="pointer-events-none absolute hidden h-px w-20.5 origin-left bg-gray-500 md:block"
+          style={{ left: 14, top: 82, transform: "rotate(135deg)" }}
+        />
+        <span
+          className="pointer-events-none absolute hidden h-1.5 w-1.5 rounded-full border border-gray-500 bg-white md:block"
+          style={{ left: -47, top: 137 }}
+        />
+
+        <p className="absolute left-1/2 top-full mt-6 w-48 -translate-x-1/2 text-center text-sm uppercase md:left-auto md:right-37 md:top-32 md:mt-0 md:w-40 md:translate-x-0 md:text-right">
           Allow A.I. access gallery
         </p>
 
